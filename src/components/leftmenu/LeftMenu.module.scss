@@ -1,0 +1,11 @@
+$vkwhite: #e0e3e6;
+$fz16: 16px;
+
+.leftMenu
+    ul {
+        list-style-type: none
+    }
+    li {
+        font-size: $fz16;
+        color: $vkwhite;
+    }
