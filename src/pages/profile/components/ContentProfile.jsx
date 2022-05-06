@@ -5,11 +5,11 @@ import profileimg from './profile-img.jpeg'
 const ContentProfile = () => {
     return (
                 <div className={styles.profile}>
-                    <div className={styles.profilePhoto}>
+                    <div className={styles.photo}>
                         <img alt='img' src={profileimg} />
                     </div>
-                    <div className={styles.profileInfo}>
-                        <div className={styles.profileName}>Aleksandr Meretti</div>
+                    <div className={styles.info}>
+                        <div className={styles.name}>Aleksandr Meretti</div>
                             <ul>
                                 <li>Date: <span>28 february 1997</span></li>
                                 <li>City: <span>Moscow</span></li>

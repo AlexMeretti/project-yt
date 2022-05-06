@@ -1,0 +1,27 @@
+
+.block {
+    display: grid;
+    grid-template-columns: 70px auto;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'avatar content';
+    column-gap: 15px;
+    margin: 15px 0;
+    .avatar {
+        grid-area: avatar;
+        img {
+            width: 50px;
+            border-radius: 50%;
+            padding: 15px;
+    
+        }
+    }
+    .content {
+        grid-area: content;
+        .name {
+            color: #e0e3e6;
+        }
+        .text {
+            color: #e0e3e6bd;
+        }
+    }
+}

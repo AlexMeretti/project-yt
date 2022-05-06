@@ -5,16 +5,16 @@
     grid-template-areas: 'profile-photo profile-info';
     column-gap: 15px;
     margin: 15px 0;
-    .profilePhoto {
+    .photo {
         grid-area: profile-photo;
         img {
             width: 100%;
             border-radius: 10px;
             }
     }
-    .profileInfo {
+    .info {
         grid-area: profile-info;
-        .profileName {
+        .name {
             color: #e0e3e6;
             font-size: 22px;
         }
