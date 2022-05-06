@@ -1,7 +1,7 @@
  import React from 'react';
  import styles from './Header.module.scss'
  import logo from '../logo.png'
- import profileimg from '../../pages/profile/components/profile-img.jpeg'
+ import profileimg from './profile-img.jpeg'
  const Header = () => {
      return (
         <div className="gridItemHeader">

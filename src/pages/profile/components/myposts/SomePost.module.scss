@@ -6,6 +6,9 @@
     grid-template-areas: 'avatar content';
     column-gap: 15px;
     margin: 15px 0;
+    background-color: #141414;
+    border-radius: 10px;
+    border-top: 1px solid #e0e3e6;
     .avatar {
         grid-area: avatar;
         img {

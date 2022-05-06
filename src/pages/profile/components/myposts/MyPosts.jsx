@@ -5,7 +5,7 @@ import SomePost from './SomePost';
 const MyPosts = () => {
     return(
         <div className={styles.block}>
-            <div className={styles.heading}>Мои посты</div>
+            <div className={styles.heading}>My Posts</div>
 
             <div className={styles.someposts}>
                 <SomePost name='Alex' message='Modi quidem tenetur dolorum eaque numquam cumque cum.'/>
