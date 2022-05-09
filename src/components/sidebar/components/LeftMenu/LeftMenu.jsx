@@ -1,16 +1,14 @@
 import React from 'react';
+import ElementMenu from './ElementMenu';
 import styles from './LeftMenu.module.scss'
-import { Link } from 'react-router-dom';
-const LeftMenu = () => {
+
+const LeftMenu = (props) => {
+    const elementMenu = props.menu.map(el => <ElementMenu key ={el.id} link={el.link} name={el.name}/>)
     return (
                 <div className={styles.leftMenu}>
                     <nav>
                         <ul>
-                            <li><Link to="/profile">Profile</Link></li>
-                            <li><Link to="/messages">Messages</Link></li>
-                            <li>News</li>
-                            <li>Music</li>
-                            <li>Settings</li>
+                            { elementMenu }
                         </ul>
                     </nav>
                 </div>

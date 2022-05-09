@@ -4,7 +4,7 @@ const SomeFriend = (props) => {
    return(
         <div className={styles.block}>
             <p>{props.name}</p>
-            <img src={props.photo} alt='friend-photo'/>
+            <img src={props.photo} alt={props.alt}/>
         </div>
    )
 }

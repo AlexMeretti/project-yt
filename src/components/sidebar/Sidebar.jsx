@@ -6,7 +6,7 @@ const Sidebar = (props) => {
     
     return (
         <>
-        <LeftMenu />
+        <LeftMenu menu={props.data.menu}/>
         <SidebarFriends friends={props.data.friends} />
         </>
         

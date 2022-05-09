@@ -3,12 +3,12 @@ import styles from './SomePost.module.scss'
 import avatar from '../UserProfile/profile-img.jpeg'
 
 const SomePost = (props) => {
-    
+    console.log(props)
     return (
         <div className={styles.block}>
             <div className={styles.avatar}><img src={avatar} alt='avatar'/></div>
             <div className={styles.content}>
-                <p className={styles.author}>{props.author}</p>
+                <p className={styles.author}>{props.id}{props.author}</p>
                 <p className={styles.text}>{props.message}</p>
             </div>
         </div>

@@ -3,12 +3,11 @@ import PageProfile from './pages/profile/PageProfile'
 import Header from './components/header/Header'
 import './Index.scss'
 import PageMessages from './pages/messages/PageMessages';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 import Sidebar from './components/sidebar/Sidebar';
 
 const App = (props) => {
     return (
-                <BrowserRouter>
                     <div className="gridContainer">
                         <Header />
                         <div className='gridItemSidebar'>
@@ -20,9 +19,7 @@ const App = (props) => {
                                     <Route path="/messages/*" element={<PageMessages data={props.state.messagesPage}/>}></Route>
                                 </Routes>
                             </div>
-                    </div>
-                </BrowserRouter>
-                
+                    </div>    
     )
 }
 export default App
