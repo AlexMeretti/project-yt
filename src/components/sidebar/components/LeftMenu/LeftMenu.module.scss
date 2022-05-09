@@ -3,7 +3,9 @@ $fz16: 16px;
 
 .leftMenu
     ul {
-        list-style-type: none
+        list-style-type: none;
+        padding-left: 0px;
+        text-align: center;
     }
     li {
         font-size: $fz16;

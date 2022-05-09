@@ -9,23 +9,23 @@ body {
     grid-template-columns: 2fr 10fr;
     grid-template-rows: 60px 1fr;
     grid-template-areas: 'header header'
-                            'leftblock content';
-    width: 960px;
+                            'sidebar content';
+    width: 90vw;
     margin: 0 auto;
     row-gap: 15px;
-}
-.gridItemHeader {
-    grid-area: header;
-    background-color: $bgcolor2;
-    border-radius: 10px;
-    position: relative;
-}
-.gridItemLeftblock {
-    grid-area: leftblock;
-}
-.gridItemContent {
-    grid-area: content;
-    background-color: $bgcolor2;
-    padding: 15px;
-    border-radius: 10px;
+    .gridItemHeader {
+        grid-area: header;
+        background-color: $bgcolor2;
+        border-radius: 10px;
+        position: relative;
+    }
+    .gridItemSidebar {
+        grid-area: sidebar;
+    }
+    .gridItemContent {
+        grid-area: content;
+        background-color: $bgcolor2;
+        padding: 15px;
+        border-radius: 10px;
+    }
 }

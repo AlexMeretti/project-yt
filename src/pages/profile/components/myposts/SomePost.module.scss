@@ -20,11 +20,14 @@
     }
     .content {
         grid-area: content;
-        .name {
+        .author {
             color: #e0e3e6;
         }
         .text {
             color: #e0e3e6bd;
+        }
+        .id {
+            color: #e0e3e6;
         }
     }
 }

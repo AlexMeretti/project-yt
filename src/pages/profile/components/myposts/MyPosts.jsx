@@ -2,14 +2,13 @@ import React from 'react';
 import styles from './MyPosts.module.scss'
 import SomePost from './SomePost';
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+    const elementPosts = props.posts.map(el => <SomePost author={el.author} message={el.message}/>)
     return(
         <div className={styles.block}>
             <div className={styles.heading}>My Posts</div>
-
             <div className={styles.someposts}>
-                <SomePost name='Alex' message='Modi quidem tenetur dolorum eaque numquam cumque cum.'/>
-                <SomePost name='Petya' message='Quidem cum aperiam corrupti id neque quis!'/>
+                { elementPosts }
             </div>
         </div>
     )
