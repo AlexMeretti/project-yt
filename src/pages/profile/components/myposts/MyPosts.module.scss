@@ -1,11 +1,21 @@
+@import '../../../../basic.scss';
+
 .block {
     .heading {
-        color: #e0e3e6;
-        font-size: 22px;
+        color: $socialTextWt;
+        font-size: $fz22;
         margin-bottom: 20px;
     }
     .someposts {
         
         border-radius: 10px;
+    }
+    .postAdd {
+        textarea {
+            width: 250px;
+            height: 75px;
+        }
+        button {
+        }
     }
 }

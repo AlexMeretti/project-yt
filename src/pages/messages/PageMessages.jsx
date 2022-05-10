@@ -14,6 +14,10 @@ const PageMessages = (props) => {
             </div>
             <div className={styles.messages}>
                 { elementMessages }
+            <div className={styles.bottomBlock}>
+                <div className={styles.leftBlock}><textarea></textarea></div>
+                <div className={styles.centerBlock}><button>Отправить</button></div>
+            </div>
             </div>
         </div>
     )

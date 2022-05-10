@@ -1,3 +1,5 @@
+@import '../../../../basic.scss';
+
 .block {
     float: left;
     width: 100px;
@@ -5,8 +7,8 @@
     p {
         margin-top: 0px;
         margin-bottom: 5px;
-        font-size: 16px;
-        color: #e0e3e6;
+        font-size: $fz16;
+        color: $socialTextWt;
     }
     img{
         width: 60px;

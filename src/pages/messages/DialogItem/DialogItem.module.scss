@@ -1,17 +1,13 @@
-$color1: #e0e3e6;
+@import '../../../basic.scss';
 
-.wrapper {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-    grid-template-areas: 'dialogs messages';
-    background-color: $color1;
-    padding: 30px;
-    border-radius: 10px;
-    .dialogs {
-        grid-area: dialogs;
-        border-right: 1px solid #222222;
-    }
-    .messages {
-        grid-area: messages;
+.dialogItem {
+    padding: 10px 0;
+    border-bottom: 1px solid $socialTextWt;
+    a {
+        color: $socialTextWt;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }

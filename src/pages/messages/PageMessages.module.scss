@@ -1,10 +1,12 @@
 $color1: #e0e3e6;
-
+$color-bg: #222222;
+$color-bg2: #292929;
+$color-bg3: #a9aaad;
 .wrapper {
     display: grid;
     grid-template-columns: 2fr 10fr;
     grid-template-areas: 'dialogs messages';
-    background-color: $color1;
+    background-color: $color-bg;
     padding: 30px;
     border-radius: 10px;
     .dialogs {
@@ -13,5 +15,36 @@ $color1: #e0e3e6;
     }
     .messages {
         grid-area: messages;
+        .bottomBlock {
+            display: grid;
+            grid-template-columns: 10fr 2fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: 'leftblock centerblock';
+            background-color: $color-bg2;
+            padding: 15px;
+            grid-gap: 10px;
+            .leftBlock {
+                grid-area: leftblock;
+                textarea {
+                    width: 100%;
+                    height: 25px;
+                    border-radius: 5px;
+                    border: 1px solid $color-bg3;
+                }
+
+            }
+            .centerBlock {
+                grid-area: centerblock;
+                button {
+                    border-radius: 5px;
+                    background-color: #333333;
+                    border: #333333;
+                    color: #e0e3e6;
+                    height: 31px;
+                    width: 100%;
+                    border: 1px solid $color-bg3;
+                }
+            }
+        }
     }
 }

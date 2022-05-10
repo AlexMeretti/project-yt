@@ -1,9 +1,11 @@
+@import '../../../../basic.scss';
+
 .wrapper {
     .heading {
         text-align: center;
         p {
-            font-size: 18px;
-            color: #e0e3e6;
+            font-size: $fz18;
+            color: $socialTextWt;
         }
     }
 }

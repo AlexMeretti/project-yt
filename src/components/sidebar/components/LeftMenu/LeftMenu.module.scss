@@ -1,5 +1,4 @@
-$vkwhite: #e0e3e6;
-$fz16: 16px;
+@import '../../../../basic.scss';
 
 .leftMenu
     ul {
@@ -9,8 +8,12 @@ $fz16: 16px;
     }
     li {
         font-size: $fz16;
-        color: $vkwhite;
+        color: $socialTextWt;
         a {
-            color: $vkwhite;
+            color: $socialTextWt;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }

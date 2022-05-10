@@ -1,8 +1,7 @@
-$bgcolor:#141414;
-$bgcolor2: #222222;
+@import './basic.scss';
 
 body {
-    background-color: $bgcolor;
+    background-color: $socialColor1;
 }
 .gridContainer {
     display: grid;
@@ -15,7 +14,7 @@ body {
     row-gap: 15px;
     .gridItemHeader {
         grid-area: header;
-        background-color: $bgcolor2;
+        background-color: $socialColor2;
         border-radius: 10px;
         position: relative;
     }
@@ -24,7 +23,7 @@ body {
     }
     .gridItemContent {
         grid-area: content;
-        background-color: $bgcolor2;
+        background-color: $socialColor2;
         padding: 15px;
         border-radius: 10px;
     }

@@ -3,7 +3,6 @@ import styles from './SomePost.module.scss'
 import avatar from '../UserProfile/profile-img.jpeg'
 
 const SomePost = (props) => {
-    console.log(props)
     return (
         <div className={styles.block}>
             <div className={styles.avatar}><img src={avatar} alt='avatar'/></div>
