@@ -3,7 +3,7 @@ import styles from './SidebarFriends.module.scss'
 import SomeFriend from './SomeFriend';
 
 const SidebarFriends = (props) => {
-    const elementFriend = props.friends.map( el => <SomeFriend name={el.name} photo={el.photo} alt={props.alt}/>)
+    const elementFriend = props.friends.map( el => <SomeFriend name={el.name} photo={el.photo} alt={el.alt} key={el.id} />)
     return (
         <div className={styles.wrapper}>
             <div className={styles.heading}>

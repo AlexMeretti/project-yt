@@ -1,0 +1,27 @@
+@import '../../../basic.scss';
+
+.bottomBlock {
+    display: grid;
+    grid-template-columns: 10fr auto;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'leftblock centerblock';
+    background-color: $socialColor1;
+    padding: 15px;
+    grid-gap: 10px;
+    .leftBlock {
+        grid-area: leftblock;
+        textarea {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid $socialColor3;
+        }
+
+    }
+    .centerBlock {
+        grid-area: centerblock;
+        button {
+            margin-top: 0px;
+            @extend .button1;
+        }
+    }
+}

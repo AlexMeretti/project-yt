@@ -3,11 +3,10 @@ import LeftMenu from './components/LeftMenu/LeftMenu';
 import SidebarFriends from './components/SidebarFriends/SidebarFriends';
 
 const Sidebar = (props) => {
-    
     return (
         <>
-        <LeftMenu menu={props.data.menu}/>
-        <SidebarFriends friends={props.data.friends} />
+        <LeftMenu menu={props.sidebar.menu}/>
+        <SidebarFriends friends={props.friends} />
         </>
         
     )

@@ -3,7 +3,7 @@ import styles from './MyPosts.module.scss'
 import SomePost from './SomePost';
 
 const MyPosts = (props) => {
-    const elementPosts = props.posts.map(el => <SomePost author={el.author} message={el.message}/>)
+    const elementPosts = props.posts.map(el => <SomePost author={el.author} message={el.message} key={el.id}/>)
 
     const addPostLink = React.createRef()
     const addPost = () => {

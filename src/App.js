@@ -11,12 +11,12 @@ const App = (props) => {
                     <div className="gridContainer">
                         <Header />
                         <div className='gridItemSidebar'>
-                        <Sidebar data={props.state.sidebar}/>
+                        <Sidebar sidebar={props.state.sidebar} friends={props.state.social.friends}/>
                         </div>
                             <div className="gridItemContent">
                                 <Routes>
                                     <Route path="/profile" element={<PageProfile data={props.state.profilePage}/>}></Route>
-                                    <Route path="/messages/*" element={<PageMessages data={props.state.messagesPage}/>}></Route>
+                                    <Route path="/messages/*" element={<PageMessages data={props.state.social}/>}></Route>
                                 </Routes>
                             </div>
                     </div>    

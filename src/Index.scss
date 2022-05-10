@@ -9,7 +9,7 @@ body {
     grid-template-rows: 60px 1fr;
     grid-template-areas: 'header header'
                             'sidebar content';
-    width: 90vw;
+    width: 70vw;
     margin: 0 auto;
     row-gap: 15px;
     .gridItemHeader {
