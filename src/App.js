@@ -15,8 +15,8 @@ const App = (props) => {
                         </div>
                             <div className="gridItemContent">
                                 <Routes>
-                                    <Route path="/profile" element={<PageProfile data={props.state.profilePage}/>}></Route>
-                                    <Route path="/messages/*" element={<PageMessages data={props.state.social}/>}></Route>
+                                    <Route path="/profile" element={<PageProfile profilepage={props.state.profilePage} dispatch={props.dispatch}/>}></Route>
+                                    <Route path="/messages/*" element={<PageMessages messagespage={props.state.social} dispatch={props.dispatch}/>}></Route>
                                 </Routes>
                             </div>
                     </div>    

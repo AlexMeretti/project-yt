@@ -9,6 +9,7 @@ const SomePost = (props) => {
             <div className={styles.content}>
                 <p className={styles.author}>{props.id}{props.author}</p>
                 <p className={styles.text}>{props.message}</p>
+                <p>Likes: {props.likes}</p>
             </div>
         </div>
     )
