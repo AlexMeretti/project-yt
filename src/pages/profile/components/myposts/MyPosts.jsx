@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./MyPosts.module.scss";
 import SomePost from "./SomePost";
-import { addPostAction, addPostOnChangeAction } from "../../../../redux/state";
+import {
+  addPostAction,
+  addPostOnChangeAction,
+} from "../../../../redux/profileReducer";
+
 const MyPosts = (props) => {
   const elementPosts = props.posts.map((el) => (
     <SomePost

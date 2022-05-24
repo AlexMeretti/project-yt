@@ -1,16 +1,17 @@
 import React from "react";
 import styles from "./AddMessage.module.scss";
-import { dialogsAddMessage } from "../../../redux/state";
+import {
+  dialogsAddMessage,
+  onChangeAddMessageState,
+} from "../../../redux/messagesReducer";
+
 const AddMessage = (props) => {
   const addMessage = () => {
     props.dispatch(dialogsAddMessage());
   };
   const onChangeAddMessage = (event) => {
     const currentMessage = event.target.value;
-    props.dispatch({
-      type: "ON-CHANGE-ADD-MESSAGE-STATE",
-      currentMessage: currentMessage,
-    });
+    props.dispatch(onChangeAddMessageState(currentMessage));
   };
   return (
     <div className={styles.bottomBlock}>

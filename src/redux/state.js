@@ -1,7 +1,7 @@
-const ADD_POST = "ADD-POST";
-const ADD_POST_ON_CHANGE_STATE = "ADD-POST-ON-CHANGE-STATE";
-const DIALOGS_ADD_MESSAGE = "DIALOGS-ADD-MESSAGE";
-const ON_CHANGE_ADD_MESSAGE_STATE = "ON-CHANGE-ADD-MESSAGE-STATE";
+import messagesReducer from "./messagesReducer";
+import profileReducer from "./profileReducer";
+import sidebarReducer from "./sidebarReducer";
+
 let store = {
   _state: {
     messagesPage: {},
@@ -77,49 +77,11 @@ let store = {
     return this._state;
   },
   dispatch(action) {
-    if (action.type === "ADD-POST") {
-      const newPost = {
-        id: 3,
-        author: "Alex",
-        message: this._state.profilePage.addPostMessage,
-        likes: 0,
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.addPostMessage = "";
-      this._rerenderEntireTree(this._state);
-    }
-    if (action.type === "ADD-POST-ON-CHANGE-STATE") {
-      this._state.profilePage.addPostMessage = action.currentMessage;
-      this._rerenderEntireTree(this._state);
-    }
-    if (action.type === "DIALOGS-ADD-MESSAGE") {
-      const newMessage = {
-        id: "4",
-        message: this._state.social.addMessage,
-      };
-      this._state.social.messages.push(newMessage);
-      this._state.social.addMessage = "";
-      this._rerenderEntireTree(this._state);
-    }
-    if (action.type === "ON-CHANGE-ADD-MESSAGE-STATE") {
-      this._state.social.addMessage = action.currentMessage;
-      this._rerenderEntireTree(this._state);
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.social = messagesReducer(this._state.social, action);
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+    this._rerenderEntireTree(this._state);
   },
 };
 
-export const addPostAction = () => ({
-  type: ADD_POST,
-});
-export const addPostOnChangeAction = (currentMessage) => ({
-  type: ADD_POST_ON_CHANGE_STATE,
-  currentMessage: currentMessage,
-});
-export const dialogsAddMessage = () => ({
-  type: DIALOGS_ADD_MESSAGE,
-});
-export const onChangeAddMessageState = (currentMessage) => ({
-  type: ON_CHANGE_ADD_MESSAGE_STATE,
-  currentMessage: currentMessage,
-});
 export default store;
