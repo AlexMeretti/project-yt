@@ -1,6 +1,6 @@
-import messagesReducer from "./messagesReducer";
-import profileReducer from "./profileReducer";
-import sidebarReducer from "./sidebarReducer";
+import messagesReducer from "./messages-reducer";
+import profileReducer from "./profile-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 let store = {
   _state: {
@@ -67,11 +67,11 @@ let store = {
       addMessage: "",
     },
   },
-  _rerenderEntireTree() {
+  _callSubscriber() {
     console.log("State changed");
   },
   subcribe(observer) {
-    this._rerenderEntireTree = observer;
+    this._callSubscriber = observer;
   },
   getState() {
     return this._state;
@@ -80,7 +80,7 @@ let store = {
     this._state.profilePage = profileReducer(this._state.profilePage, action);
     this._state.social = messagesReducer(this._state.social, action);
     this._state.sidebar = sidebarReducer(this._state.sidebar, action);
-    this._rerenderEntireTree(this._state);
+    this.callSubscriber(this._state);
   },
 };
 

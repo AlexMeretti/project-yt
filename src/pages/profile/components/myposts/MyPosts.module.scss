@@ -1,21 +1,20 @@
-@import '../../../../basic.scss';
+@import "../../../../basic.scss";
 
 .block {
-    .heading {
-        color: $socialTextWt;
-        font-size: $fz22;
-        margin-bottom: 20px;
+  .heading {
+    color: $socialTextWt;
+    font-size: $fz22;
+    margin-bottom: 20px;
+  }
+  .someposts {
+    border-radius: 10px;
+  }
+  .postAdd {
+    textarea {
+      width: 250px;
+      height: 75px;
     }
-    .someposts {
-        
-        border-radius: 10px;
+    button {
     }
-    .postAdd {
-        textarea {
-            width: 250px;
-            height: 75px;
-        }
-        button {
-        }
-    }
+  }
 }

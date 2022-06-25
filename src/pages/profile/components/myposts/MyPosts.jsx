@@ -1,13 +1,9 @@
 import React from "react";
 import styles from "./MyPosts.module.scss";
 import SomePost from "./SomePost";
-import {
-  addPostAction,
-  addPostOnChangeAction,
-} from "../../../../redux/profileReducer";
 
 const MyPosts = (props) => {
-  const elementPosts = props.posts.map((el) => (
+  const elementPosts = props.state.posts.map((el) => (
     <SomePost
       author={el.author}
       message={el.message}
@@ -17,11 +13,10 @@ const MyPosts = (props) => {
   ));
 
   const addPost = () => {
-    props.dispatch(addPostAction());
+    props.onAddPost();
   };
-  const addPostOnChange = (event) => {
-    const currentMessage = event.target.value;
-    props.dispatch(addPostOnChangeAction(currentMessage));
+  const addPostChange = (e) => {
+    props.onAddPostChange(e.target.value);
   };
   return (
     <div className={styles.block}>
@@ -29,8 +24,8 @@ const MyPosts = (props) => {
       <div className={styles.postAdd}>
         <div className={styles.blockTextArea}>
           <textarea
-            onChange={addPostOnChange}
-            value={props.addPostMessage}
+            onChange={addPostChange}
+            value={props.state.addPostCurrentText}
             placeholder="Enter your post"
           />
         </div>

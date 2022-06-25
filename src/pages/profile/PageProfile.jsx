@@ -1,14 +1,14 @@
 import React from "react";
 import ContentImg from "./components/imageProfile/ImageProfile";
 import UserProfile from "./components/UserProfile/UserProfile";
-import MyPosts from "./components/myposts/MyPosts";
+import MyPostsContainer from "./components/myposts/MyPostsContainer";
 
 const PageProfile = (props) => {
   return (
     <>
       <ContentImg />
       <UserProfile />
-      <MyPosts posts={props.profilepage.posts} dispatch={props.dispatch} />
+      <MyPostsContainer store={props.store} dispatch={props.dispatch} />
     </>
   );
 };

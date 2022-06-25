@@ -1,24 +1,18 @@
-import React from "react";
 import styles from "./AddMessage.module.scss";
-import {
-  dialogsAddMessage,
-  onChangeAddMessageState,
-} from "../../../redux/messagesReducer";
 
 const AddMessage = (props) => {
   const addMessage = () => {
-    props.dispatch(dialogsAddMessage());
+    props.onAddMessage();
   };
   const onChangeAddMessage = (event) => {
-    const currentMessage = event.target.value;
-    props.dispatch(onChangeAddMessageState(currentMessage));
+    props.onAddMessageChange(event.target.value);
   };
   return (
     <div className={styles.bottomBlock}>
       <div className={styles.leftBlock}>
         <textarea
           onChange={onChangeAddMessage}
-          value={props.addMessage}
+          value={props.addMessageCurrentText}
           placeholder="Enter your message"
         />
       </div>
