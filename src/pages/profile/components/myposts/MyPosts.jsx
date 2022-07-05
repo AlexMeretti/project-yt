@@ -3,7 +3,7 @@ import styles from "./MyPosts.module.scss";
 import SomePost from "./SomePost";
 
 const MyPosts = (props) => {
-  const elementPosts = props.state.posts.map((el) => (
+  const elementPosts = props.profilePage.posts.map((el) => (
     <SomePost
       author={el.author}
       message={el.message}
@@ -25,7 +25,7 @@ const MyPosts = (props) => {
         <div className={styles.blockTextArea}>
           <textarea
             onChange={addPostChange}
-            value={props.state.addPostCurrentText}
+            value={props.profilePage.addPostCurrentText}
             placeholder="Enter your post"
           />
         </div>

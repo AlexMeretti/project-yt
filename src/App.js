@@ -3,30 +3,18 @@ import PageProfile from "./pages/profile/PageProfile";
 import Header from "./components/header/Header";
 import "./Index.scss";
 import { Routes, Route } from "react-router-dom";
-import Sidebar from "./components/sidebar/Sidebar";
-import PageMessages from "./pages/messages/PageMessages";
+import SidebarContainer from "./components/sidebar/SidebarContainer";
+import PageMessagesContainer from "./pages/messages/PageMessagesContainer";
 
 const App = (props) => {
   return (
     <div className="gridContainer">
       <Header />
-      <div className="gridItemSidebar">
-        <Sidebar sidebar={props.store.getState().sidebar} />
-      </div>
+      <div className="gridItemSidebar">{<SidebarContainer />}</div>
       <div className="gridItemContent">
         <Routes>
-          <Route
-            path="/profile"
-            element={
-              <PageProfile store={props.store} dispatch={props.dispatch} />
-            }
-          ></Route>
-          <Route
-            path="/messages/*"
-            element={
-              <PageMessages store={props.store} dispatch={props.dispatch} />
-            }
-          ></Route>
+          <Route path="/profile" element={<PageProfile />}></Route>
+          <Route path="/messages/*" element={<PageMessagesContainer />}></Route>
         </Routes>
       </div>
     </div>

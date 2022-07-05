@@ -1,20 +1,25 @@
+import { connect } from "react-redux";
 import { addMessage, addMessageChange } from "../../../redux/messages-reducer";
 import AddMessage from "./AddMessage";
 
-const AddMessageContainer = (props) => {
-  let state = props.store.getState().messagesPage;
-  const onAddMessage = () => {
-    props.dispatch(addMessage());
+const mapStateToProps = (state) => {
+  return {
+    addMessageCurrentText: state.messagesPage.addMessageCurrentText,
   };
-  const onAddMessageChange = (currentText) => {
-    props.dispatch(addMessageChange(currentText));
-  };
-  return (
-    <AddMessage
-      onAddMessage={onAddMessage}
-      onAddMessageChange={onAddMessageChange}
-      addMessageCurrentText={state.addMessageCurrentText}
-    />
-  );
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddMessage: () => {
+      dispatch(addMessage());
+    },
+    onAddMessageChange: (currentText) => {
+      dispatch(addMessageChange(currentText));
+    },
+  };
+};
+
+const AddMessageContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddMessage);
 export default AddMessageContainer;
