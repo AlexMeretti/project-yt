@@ -2,21 +2,18 @@ import React from "react";
 import styles from "./MyPosts.module.scss";
 import SomePost from "./SomePost";
 
-const MyPosts = (props) => {
+const UserPosts = (props) => {
   const elementPosts = props.profilePage.posts.map((el) => (
     <SomePost
       author={el.author}
       message={el.message}
       key={el.id}
       likes={el.likes}
+      avatar={props.profilePage.profile.photos.small}
     />
   ));
-
-  const addPost = () => {
-    props.onAddPost();
-  };
   const addPostChange = (e) => {
-    props.onAddPostChange(e.target.value);
+    props.addPostChange(e.target.value);
   };
   return (
     <div className={styles.block}>
@@ -30,7 +27,7 @@ const MyPosts = (props) => {
           />
         </div>
         <div className={styles.blockButton}>
-          <button className="button1" onClick={addPost}>
+          <button className="button1" onClick={() => props.addPost()}>
             Add Message
           </button>
         </div>
@@ -39,4 +36,4 @@ const MyPosts = (props) => {
     </div>
   );
 };
-export default MyPosts;
+export default UserPosts;

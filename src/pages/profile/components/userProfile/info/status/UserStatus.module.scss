@@ -1,0 +1,23 @@
+.status {
+  span {
+    color: white;
+    margin: 5px 0;
+    padding: 1px 3px;
+    border-radius: 3px;
+    &:hover {
+      background-color: #606062;
+    }
+  }
+}
+.statusEdit {
+  span {
+    margin-left: 5px;
+    color: white;
+    border-radius: 10px;
+    padding: 3px 5px;
+    background-color: #606062;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

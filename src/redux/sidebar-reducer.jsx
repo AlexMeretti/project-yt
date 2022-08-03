@@ -2,9 +2,10 @@ let initialState = {
   menu: [
     { id: "1", link: "/profile", name: "Profile" },
     { id: "2", link: "/messages", name: "Messages" },
-    { id: "3", link: "/news", name: "News" },
-    { id: "4", link: "/music", name: "Music" },
-    { id: "5", link: "/settings", name: "Settings" },
+    { id: "3", link: "/users", name: "Users" },
+    { id: "4", link: "/news", name: "News" },
+    { id: "5", link: "/music", name: "Music" },
+    { id: "6", link: "/settings", name: "Settings" },
   ],
   friends: [
     {
