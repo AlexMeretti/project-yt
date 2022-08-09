@@ -99,46 +99,44 @@ export const userButtonProcess = (id, isProcess) => ({
   isProcess,
 });
 export const getUsersThunk = (usersActivePage, usersPerPage) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(setUsersFetching(true));
-    usersAPI.getUsers(usersActivePage, usersPerPage).then((data) => {
-      dispatch(setUsersFetching(false));
-      dispatch(setUsers(data.items));
-      dispatch(setUsersTotalCount(data.totalCount));
-      dispatch(setUsersTotalPages(data.totalCount / usersPerPage));
-    });
+    const data = await usersAPI.getUsers(usersActivePage, usersPerPage);
+    dispatch(setUsersFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(setUsersTotalCount(data.totalCount));
+    dispatch(setUsersTotalPages(data.totalCount / usersPerPage));
   };
 };
 export const usersChangePageThunk = (page, usersPerPage) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(setUsersFetching(true));
     dispatch(setUsersActivePage(page));
-    usersAPI.usersChangePage(page, usersPerPage).then((data) => {
-      dispatch(setUsers(data.items));
-      dispatch(setUsersFetching(false));
-    });
+    const data = await usersAPI.usersChangePage(page, usersPerPage);
+    dispatch(setUsers(data.items));
+    dispatch(setUsersFetching(false));
   };
 };
+
+export const followUnfollowThunk = (userId, methodApi) => {
+  return async (dispatch) => {
+    dispatch(userButtonProcess(userId, true));
+    const response = await methodApi;
+    if (response.data.resultCode === 0) {
+      dispatch(userToggleFollow(userId));
+    }
+    dispatch(userButtonProcess(userId, false));
+  };
+};
+
 export const followThunk = (userId) => {
   return (dispatch) => {
-    dispatch(userButtonProcess(userId, true));
-    usersAPI.follow(userId).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(userToggleFollow(userId));
-      }
-      dispatch(userButtonProcess(userId, false));
-    });
+    dispatch(followUnfollowThunk(userId, usersAPI.follow(userId)));
   };
 };
 export const unfollowThunk = (userId) => {
   return (dispatch) => {
-    dispatch(userButtonProcess(userId, true));
-    usersAPI.unfollow(userId).then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(userToggleFollow(userId));
-      }
-      dispatch(userButtonProcess(userId, false));
-    });
+    dispatch(followUnfollowThunk(userId, usersAPI.unfollow(userId)));
   };
 };
 export default usersReducer;

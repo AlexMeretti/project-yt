@@ -1,30 +1,45 @@
-@import './basic.scss';
+@import "./basic.scss";
 
 body {
-    background-color: $socialColor1;
+  background-color: $socialColor1;
 }
 .gridContainer {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-    grid-template-rows: 60px 1fr;
-    grid-template-areas: 'header header'
-                            'sidebar content';
-    width: 70vw;
-    margin: 0 auto;
-    row-gap: 15px;
-    .gridItemHeader {
-        grid-area: header;
-        background-color: $socialColor2;
-        border-radius: 10px;
-        position: relative;
-    }
-    .gridItemSidebar {
-        grid-area: sidebar;
-    }
-    .gridItemContent {
-        grid-area: content;
-        background-color: $socialColor2;
-        padding: 15px;
-        border-radius: 10px;
-    }
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar content";
+  width: 992px;
+  margin: 0 auto;
+  row-gap: 15px;
+
+  .gridItemHeader {
+    grid-area: header;
+    background-color: $socialColor2;
+    border-radius: 10px;
+  }
+  .gridItemSidebar {
+    grid-area: sidebar;
+  }
+  .gridItemContent {
+    grid-area: content;
+    background-color: $socialColor2;
+    padding: 15px;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 576px) {
+  .gridContainer {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header"
+      "sidebar"
+      "content";
+  }
+  .gridItemHeader {
+    padding: 10px 0;
+  }
 }

@@ -10,11 +10,10 @@
 }
 .profile {
   display: grid;
-  grid-template-columns: 150px auto;
+  grid-template-columns: 1fr 4fr;
   grid-template-rows: 1fr;
   grid-template-areas: "profile-photo profile-info";
   column-gap: 15px;
-  margin: 15px 0;
   .photo {
     grid-area: profile-photo;
     img {
@@ -22,5 +21,12 @@
       border-radius: 10px;
       border: 1px solid $socialTextWt;
     }
+  }
+}
+@media (max-width: 576px) {
+  .profile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "profile-photo" " profile-info";
   }
 }

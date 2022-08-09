@@ -1,7 +1,6 @@
 import styles from "./AddMessage.module.scss";
 
 const AddMessage = (props) => {
-  console.log(props);
   const addMessage = () => {
     props.onAddMessage();
   };

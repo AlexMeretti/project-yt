@@ -3,19 +3,30 @@ import Fetching from "../../components/common/fetching/Fetching";
 import UserPostsContainer from "./components/userPosts/UserPostsContainer";
 import UserDescription from "./components/userProfile/UserDescription";
 
-const UserProfile = (props) => {
-  window.state = props;
-  if (props.profilePage.profile === null) {
+const UserProfile = ({
+  profilePage,
+  setProfileStatus,
+  owner,
+  setAvatar,
+  setProfileData,
+  profileEditModeToggle,
+}) => {
+  if (profilePage.profile === null) {
     return <Fetching />;
   } else
     return (
       <>
         <UserDescription
-          profile={props.profilePage.profile}
-          status={props.profilePage.status}
-          setProfileStatus={props.setProfileStatus}
+          profileEditMode={profilePage.profileEditMode}
+          profileEditModeToggle={profileEditModeToggle}
+          setProfileData={setProfileData}
+          setAvatar={setAvatar}
+          owner={owner}
+          profile={profilePage.profile}
+          status={profilePage.status}
+          setProfileStatus={setProfileStatus}
         />
-        <UserPostsContainer />
+        <UserPostsContainer owner={owner} />
       </>
     );
 };

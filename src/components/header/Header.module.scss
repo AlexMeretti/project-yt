@@ -1,15 +1,17 @@
 .headerWrap {
-    width: 960px;
-    img {
-        width: 40px;
-        padding: 10px;
-    }
+  padding: 0px 10px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .headerIcon {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    img {
-        border-radius: 50%;
-    }
+  a {
+    color: white;
+  }
+}
+.headerLogo {
+  img {
+    width: 40px;
+  }
 }

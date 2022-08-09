@@ -1,38 +1,56 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { compose } from "redux";
 import {
   setUserProfile,
   getProfileThunk,
   getProfileStatusThunk,
   setProfileStatus,
+  setAvatar,
+  setProfileData,
+  profileEditModeToggle,
 } from "../../redux/profile-reducer";
+import {
+  getAuth,
+  getProfilePage,
+} from "../../redux/selectors/profile-selector";
 import UserProfile from "./UserProfile";
 import withRouter from "./WithRouter";
 class UserProfileContainer extends React.Component {
-  componentDidMount() {
+  renderProfile() {
     let userId = this.props.router.params.id;
-    if (userId) {
-      this.props.getProfileThunk(userId);
-      this.props.getProfileStatusThunk(userId);
+    if (!userId) {
+      userId = this.props.auth.id;
+      if (!userId) {
+      }
+    }
+    this.props.getProfileThunk(userId);
+    this.props.getProfileStatusThunk(userId);
+  }
+  componentDidMount() {
+    if (this.props.router.params.id || this.props.auth.id) {
+      this.renderProfile();
     }
   }
   componentDidUpdate(prevProps) {
-    if (this.props.auth.isAuth !== prevProps.auth.isAuth) {
-      let userId = this.props.auth.id;
-      this.props.getProfileThunk(userId);
-      this.props.getProfileStatusThunk(userId);
+    if (this.props.router.params.id !== prevProps.router.params.id) {
+      this.renderProfile();
     }
   }
+
   render() {
-    return <UserProfile {...this.props} />;
+    if (!this.props.router.params.id && !this.props.auth.id) {
+      return <Navigate replace to="/" />;
+    }
+    return <UserProfile {...this.props} owner={!this.props.router.params.id} />;
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    profilePage: state.profilePage,
-    auth: state.auth,
+    profilePage: getProfilePage(state),
+    auth: getAuth(state),
   };
 };
 
@@ -42,6 +60,9 @@ export default compose(
     getProfileThunk,
     getProfileStatusThunk,
     setProfileStatus,
+    setAvatar,
+    setProfileData,
+    profileEditModeToggle,
   }),
   withRouter
 )(UserProfileContainer);

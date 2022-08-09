@@ -17,21 +17,23 @@ const UserPosts = (props) => {
   };
   return (
     <div className={styles.block}>
-      <div className={styles.heading}>My Posts</div>
-      <div className={styles.postAdd}>
-        <div className={styles.blockTextArea}>
-          <textarea
-            onChange={addPostChange}
-            value={props.profilePage.addPostCurrentText}
-            placeholder="Enter your post"
-          />
+      <div className={styles.heading}>Posts</div>
+      {props.owner && (
+        <div className={styles.postAdd}>
+          <div className={styles.blockTextArea}>
+            <textarea
+              onChange={addPostChange}
+              value={props.profilePage.addPostCurrentText}
+              placeholder="Enter your post"
+            />
+          </div>
+          <div className={styles.blockButton}>
+            <button className="button1" onClick={() => props.addPost()}>
+              Add Message
+            </button>
+          </div>
         </div>
-        <div className={styles.blockButton}>
-          <button className="button1" onClick={() => props.addPost()}>
-            Add Message
-          </button>
-        </div>
-      </div>
+      )}
       <div className={styles.someposts}>{elementPosts}</div>
     </div>
   );

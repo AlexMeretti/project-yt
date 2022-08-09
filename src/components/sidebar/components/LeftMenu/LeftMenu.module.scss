@@ -1,19 +1,28 @@
-@import '../../../../basic.scss';
+@import "../../../../basic.scss";
 
-.leftMenu
-    ul {
-        list-style-type: none;
-        padding-left: 0px;
-        text-align: center;
+.leftMenu ul {
+  list-style-type: none;
+  padding-left: 0px;
+  text-align: center;
+}
+li {
+  font-size: $fz16;
+  color: $socialTextWt;
+  a {
+    color: $socialTextWt;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
     }
+  }
+}
+
+@media (max-width: 576px) {
+  .leftMenu ul {
+    margin: 0px;
     li {
-        font-size: $fz16;
-        color: $socialTextWt;
-        a {
-            color: $socialTextWt;
-            text-decoration: none;
-            &:hover {
-                text-decoration: underline;
-            }
-        }
+      display: inline-block;
+      margin: 0px 10px;
     }
+  }
+}

@@ -10,15 +10,15 @@ const Header = (props) => {
         <div className={styles.headerLogo}>
           <img src={logo} alt="logo" />
         </div>
-        {
-          <div className={styles.headerIcon}>
-            {props.isAuth ? (
-              <AuthTrue login={props.login} logout={props.logout} />
-            ) : (
-              <AuthFalse />
-            )}
-          </div>
-        }
+        {props.isAuth ? (
+          <AuthTrue
+            login={props.login}
+            logout={props.logout}
+            profile={props.profile}
+          />
+        ) : (
+          <AuthFalse />
+        )}
       </header>
     </div>
   );

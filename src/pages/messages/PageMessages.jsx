@@ -13,6 +13,7 @@ const PageMessages = (props) => {
   ));
   return (
     <div className={styles.wrapper}>
+      <h3>coming soon</h3>
       <div className={styles.dialogs}>{elementDialogs}</div>
       <div className={styles.messages}>
         {elementMessages}

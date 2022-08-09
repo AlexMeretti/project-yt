@@ -5,5 +5,4 @@ const mapStateToProps = (state) => {
     messagesPage: state.messagesPage,
   };
 };
-const PageMessagesContainer = connect(mapStateToProps)(PageMessages);
-export default PageMessagesContainer;
+export default connect(mapStateToProps)(PageMessages);

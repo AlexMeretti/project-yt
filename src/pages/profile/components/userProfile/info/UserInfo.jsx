@@ -1,38 +1,41 @@
+import { reduxForm } from "redux-form";
+import UserData from "./data/UserData";
+import UserDataEdit from "./data/UserDataEdit";
 import UserStatus from "./status/UserStatus";
 import styles from "./UserInfo.module.scss";
 
-const UserInfo = (props) => {
+const UserInfo = ({
+  profile,
+  setProfileStatus,
+  status,
+  setProfileData,
+  owner,
+  profileEditModeToggle,
+  profileEditMode,
+}) => {
+  const editFormSubmit = (values) => {
+    setProfileData(values);
+  };
   return (
     <div className={styles.info}>
-      <div className={styles.name}>{props.profile.fullName}</div>
-      <UserStatus
-        status={props.status}
-        setProfileStatus={props.setProfileStatus}
-      />
-      <ul>
-        {props.profile.aboutMe !== null || "" ? (
-          <li>
-            About me:
-            <span> {props.profile.aboutMe}</span>
-          </li>
-        ) : null}
-        <li>
-          Looking for a job:{" "}
-          {props.profile.lookingForAJob ? (
-            <span>find job</span>
-          ) : (
-            <span>No</span>
-          )}
-        </li>
-        {props.profile.lookingForAJobDescription !== null || "" ? (
-          <li>
-            Job description:
-            <span> {props.profile.lookingForAJobDescription}</span>
-          </li>
-        ) : null}
-      </ul>
+      <div className={styles.name}>{profile.fullName}</div>
+      <UserStatus status={status} setProfileStatus={setProfileStatus} />
+      {profileEditMode ? (
+        <UserDataEditRedux
+          profileEditModeToggle={profileEditModeToggle}
+          profile={profile}
+          initialValues={profile}
+          onSubmit={editFormSubmit}
+        />
+      ) : (
+        <UserData
+          profile={profile}
+          profileEditModeToggle={profileEditModeToggle}
+          owner={owner}
+        />
+      )}
     </div>
   );
 };
-
+const UserDataEditRedux = reduxForm({ form: "editProfile" })(UserDataEdit);
 export default UserInfo;

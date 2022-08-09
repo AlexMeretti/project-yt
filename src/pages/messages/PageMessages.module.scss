@@ -1,17 +1,24 @@
-@import '../../basic.scss';
+@import "../../basic.scss";
 
 .wrapper {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-    grid-template-areas: 'dialogs messages';
-    background-color: $socialColor2;
-    border-radius: 10px;
-    column-gap: 20px;
-    .dialogs {
-        grid-area: dialogs;
-        border-right: 1px solid #222222;
-    }
-    .messages {
-        grid-area: messages;
-    }
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  grid-template-areas: "dialogs messages";
+  background-color: $socialColor2;
+  border-radius: 10px;
+  column-gap: 20px;
+  .dialogs {
+    grid-area: dialogs;
+    border-right: 1px solid #222222;
+  }
+  .messages {
+    grid-area: messages;
+  }
+}
+@media (max-width: 576px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "dialogs" " messages";
+  }
 }

@@ -10,7 +10,6 @@ import styles from "./LoginForm.module.scss";
 const maxLength30 = maxLengthCreator(30);
 const input = FormControls("input");
 const LoginForm = (props) => {
-  console.log(props);
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit} className={styles.loginForm}>
@@ -38,7 +37,19 @@ const LoginForm = (props) => {
         <label htmlFor="email">Remember me</label>
         <Field name="rememberMe" component="input" type="checkbox" />
       </div>
-      <div>{props.error}</div>
+      <div className={styles.error}>{props.error}</div>
+      {props.captcha && (
+        <div className={styles.captcha}>
+          <img src={props.captcha} alt="captcha" />
+          <Field
+            name="captcha"
+            component={input}
+            type="text"
+            placeholder="Please enter captcha"
+          />
+        </div>
+      )}
+
       <button type="submit">Submit</button>
     </form>
   );

@@ -8,6 +8,11 @@
   align-items: center;
   justify-items: start;
 }
+@media (max-width: 576px) {
+  .usersBlock {
+    grid-template-columns: auto auto auto;
+  }
+}
 .avatar {
   img {
     width: 35px;
