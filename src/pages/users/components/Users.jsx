@@ -1,48 +1,92 @@
-import UserElement from "./UserElement";
+import React, { useEffect, useState } from "react";
 import styles from "./Users.module.scss";
-
+import ReactPaginate from "react-paginate";
+import UserElement from "./UserElement";
 const Users = (props) => {
-  const pagesArray = [];
-  for (let i = 1; i <= 10; i++) {
-    pagesArray.push(i);
-  }
-
-  const createPages = () => {
-    return pagesArray.map((page, index) => (
-      <span
-        key={index}
-        onClick={() => props.usersChangePage(page)}
-        className={
-          props.pagination.usersActivePage === page ? styles.activePage : null
-        }
-      >
-        {page}
-      </span>
-    ));
-  };
   return (
     <>
       <div className={styles.usersContent}>
         <div className={styles.fetching}>
-          {props.isFetching ? <p>Loading</p> : <p>Users</p>}
+          <p>Users</p>
         </div>
-        {props.users.map((user) => (
-          <UserElement
-            name={user.name}
-            followed={user.followed}
-            avatar={user.avatar}
-            status={user.status}
-            key={user.id}
-            id={user.id}
-            followThunk={props.followThunk}
-            unfollowThunk={props.unfollowThunk}
-            isFollowingProcess={props.isFollowingProcess}
-          />
-        ))}
+        <PaginatedItems
+          currentUsers={props.currentUsers}
+          getCurrentUsers={props.getCurrentUsers}
+          followThunk={props.followThunk}
+          unfollowThunk={props.unfollowThunk}
+          isFollowingProcess={props.isFollowingProcess}
+        />
       </div>
-      <div className={styles.usersPagination}>{createPages()}</div>
     </>
   );
 };
+const PaginatedItems = ({
+  currentUsers,
+  getCurrentUsers,
+  followThunk,
+  unfollowThunk,
+  isFollowingProcess,
+}) => {
+  const [page, setPage] = React.useState(1);
+  const [pageCount, setPageCount] = useState(0);
+  const perPage = 10;
+  useEffect(() => {
+    getCurrentUsers(page, perPage).then((totalCount) =>
+      setPageCount(Math.ceil(totalCount / perPage))
+    );
+  }, [page, getCurrentUsers]);
+  const handlePageClick = (event) => {
+    setPage(event.selected + 1);
+  };
 
+  return (
+    <>
+      <CurrentUsers
+        currentUsers={currentUsers}
+        followThunk={followThunk}
+        unfollowThunk={unfollowThunk}
+        isFollowingProcess={isFollowingProcess}
+      />
+      <div className={styles.paginate}>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+          activeClassName={styles.paginateActive}
+          previousClassName={styles.paginateLi}
+          nextClassName={styles.paginateLi}
+          breakClassName={styles.paginateLi}
+          pageClassName={styles.paginateLi}
+          disabledClassName={styles.paginateActive}
+        />
+      </div>
+    </>
+  );
+};
+const CurrentUsers = ({
+  currentUsers,
+  followThunk,
+  unfollowThunk,
+  isFollowingProcess,
+}) => {
+  if (currentUsers) {
+    return currentUsers.map((user) => (
+      <UserElement
+        name={user.name}
+        followed={user.followed}
+        avatar={user.avatar}
+        status={user.status}
+        key={user.id}
+        userId={user.id}
+        followThunk={followThunk}
+        unfollowThunk={unfollowThunk}
+        isFollowingProcess={isFollowingProcess}
+      />
+    ));
+  }
+};
 export default Users;

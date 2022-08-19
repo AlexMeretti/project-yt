@@ -1,10 +1,9 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
 import {
-  getUsersThunk,
-  usersChangePageThunk,
   followThunk,
   unfollowThunk,
+  getCurrentUsers,
 } from "../../redux/users-reducer";
 import PageUsers from "./PageUsers";
 const mapStateToProps = (state) => {
@@ -15,9 +14,8 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {
-    getUsersThunk,
-    usersChangePageThunk,
     followThunk,
     unfollowThunk,
+    getCurrentUsers,
   })
 )(PageUsers);

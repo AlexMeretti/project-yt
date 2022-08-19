@@ -1,21 +1,9 @@
 import { usersAPI } from "../api/api";
 const USER_TOGGLE_FOLLOW = "USER_TOGGLE_FOLLOW";
-const USER_UNFOLLOW = "USER_UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_USERS_TOTAL_COUNT = "SET_USERS_TOTAL_COUNT";
-const SET_USERS_TOTAL_PAGES = "SET_USERS_TOTAL_PAGES";
-const SET_USERS_ACTIVE_PAGE = "SET_USERS_ACTIVE_PAGE";
-const SET_USERS_FETCHING = "SET_USERS_FETCHING";
+const SET_CURRENT_USERS = "SET_CURRENT_USERS";
 const USER_BUTTON_PROCESS = "USER_BUTTON_PROCESS";
 let initialState = {
-  users: [],
-  pagination: {
-    usersPerPage: 10,
-    usersTotalCount: 0,
-    usersActivePage: 1,
-    usersTotalPages: 0,
-  },
-  isFetching: false,
+  currentUsers: [],
   isFollowingProcess: [],
 };
 const usersReducer = (state = initialState, action) => {
@@ -23,36 +11,16 @@ const usersReducer = (state = initialState, action) => {
     case USER_TOGGLE_FOLLOW:
       return {
         ...state,
-        users: state.users.map((user) => {
+        currentUsers: state.currentUsers.map((user) => {
           if (user.id === action.userId) {
             return { ...user, followed: !user.followed };
           } else return user;
         }),
       };
-    case SET_USERS:
+    case SET_CURRENT_USERS:
       return {
         ...state,
-        users: [...action.users],
-      };
-    case SET_USERS_TOTAL_COUNT:
-      return {
-        ...state,
-        pagination: { ...state.pagination, usersTotalCount: action.usersCount },
-      };
-    case SET_USERS_TOTAL_PAGES:
-      return {
-        ...state,
-        pagination: { ...state.pagination, usersTotalPages: action.pages },
-      };
-    case SET_USERS_ACTIVE_PAGE:
-      return {
-        ...state,
-        pagination: { ...state.pagination, usersActivePage: action.page },
-      };
-    case SET_USERS_FETCHING:
-      return {
-        ...state,
-        isFetching: action.isFetching,
+        currentUsers: [...action.currentUsers],
       };
     case USER_BUTTON_PROCESS:
       return {
@@ -65,61 +33,30 @@ const usersReducer = (state = initialState, action) => {
       return state;
   }
 };
+export const setCurrentUsers = (currentUsers) => ({
+  type: SET_CURRENT_USERS,
+  currentUsers,
+});
 export const userToggleFollow = (userId) => ({
   type: USER_TOGGLE_FOLLOW,
   userId,
 });
-export const userUnfollow = (userId) => ({
-  type: USER_UNFOLLOW,
-  userId,
-});
-export const setUsers = (users) => ({
-  type: SET_USERS,
-  users,
-});
-export const setUsersTotalCount = (usersCount) => ({
-  type: SET_USERS_TOTAL_COUNT,
-  usersCount,
-});
-export const setUsersTotalPages = (pages) => ({
-  type: SET_USERS_TOTAL_PAGES,
-  pages,
-});
-export const setUsersActivePage = (page) => ({
-  type: SET_USERS_ACTIVE_PAGE,
-  page,
-});
-export const setUsersFetching = (isFetching) => ({
-  type: SET_USERS_FETCHING,
-  isFetching,
-});
+
 export const userButtonProcess = (id, isProcess) => ({
   type: USER_BUTTON_PROCESS,
   id,
   isProcess,
 });
-export const getUsersThunk = (usersActivePage, usersPerPage) => {
+export const getCurrentUsers = (page, perPage) => {
   return async (dispatch) => {
-    dispatch(setUsersFetching(true));
-    const data = await usersAPI.getUsers(usersActivePage, usersPerPage);
-    dispatch(setUsersFetching(false));
-    dispatch(setUsers(data.items));
-    dispatch(setUsersTotalCount(data.totalCount));
-    dispatch(setUsersTotalPages(data.totalCount / usersPerPage));
+    const response = await usersAPI.getUsers(page, perPage);
+    dispatch(setCurrentUsers(response.items));
+    return response.totalCount;
   };
 };
-export const usersChangePageThunk = (page, usersPerPage) => {
-  return async (dispatch) => {
-    dispatch(setUsersFetching(true));
-    dispatch(setUsersActivePage(page));
-    const data = await usersAPI.usersChangePage(page, usersPerPage);
-    dispatch(setUsers(data.items));
-    dispatch(setUsersFetching(false));
-  };
-};
-
 export const followUnfollowThunk = (userId, methodApi) => {
   return async (dispatch) => {
+    debugger;
     dispatch(userButtonProcess(userId, true));
     const response = await methodApi;
     if (response.data.resultCode === 0) {

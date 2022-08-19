@@ -1,4 +1,4 @@
-import UsersContent from "./components/UsersContent";
+import Users from "./components/Users";
 import UsersFilters from "./components/UsersFilters";
 import styles from "./PageUsers.module.scss";
 const PageUsers = (props) => {
@@ -6,15 +6,13 @@ const PageUsers = (props) => {
     <>
       <div className={styles.wrapper}>
         <div className={styles.users}>
-          <UsersContent
-            pagination={props.usersPage.pagination}
-            users={props.usersPage.users}
+          <Users
             isFetching={props.usersPage.isFetching}
-            getUsersThunk={props.getUsersThunk}
-            usersChangePageThunk={props.usersChangePageThunk}
             followThunk={props.followThunk}
             unfollowThunk={props.unfollowThunk}
+            getCurrentUsers={props.getCurrentUsers}
             isFollowingProcess={props.usersPage.isFollowingProcess}
+            currentUsers={props.usersPage.currentUsers}
           />
         </div>
         <div className={styles.filters}>

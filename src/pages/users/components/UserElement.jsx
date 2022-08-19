@@ -2,35 +2,44 @@ import { Link } from "react-router-dom";
 import styles from "./UserElement.module.scss";
 import noAvatar from "./noAvatar.png";
 
-const UserElement = (props) => {
+const UserElement = ({
+  avatar,
+  name,
+  userId,
+  status,
+  unfollowThunk,
+  followThunk,
+  isFollowingProcess,
+  followed,
+}) => {
   return (
     <div className={styles.usersBlock}>
       <div className={styles.avatar}>
-        <img src={props.avatar ? props.avatar : noAvatar} alt={props.name} />
+        <img src={avatar ? avatar : noAvatar} alt={name} />
       </div>
       <div className={styles.description}>
         <p className={styles.name}>
-          <Link to={`/profile/` + props.id}>{props.name}</Link>
+          <Link to={`/profile/` + userId}>{name}</Link>
         </p>
-        <p className={styles.status}>{props.status}</p>
+        <p className={styles.status}>{status}</p>
       </div>
       <div className={styles.toggleButtons}>
-        {props.followed ? (
+        {followed ? (
           <button
-            disabled={props.isFollowingProcess.some((id) => id === props.id)}
+            disabled={isFollowingProcess.some((id) => id === userId)}
             className={styles.removeFriendButton}
             onClick={() => {
-              props.unfollowThunk(props.id);
+              unfollowThunk(userId);
             }}
           >
             Remove friend
           </button>
         ) : (
           <button
-            disabled={props.isFollowingProcess.some((id) => id === props.id)}
+            disabled={isFollowingProcess.some((id) => id === userId)}
             className={styles.addFriendButton}
             onClick={() => {
-              props.followThunk(props.id);
+              followThunk(userId);
             }}
           >
             Add friend

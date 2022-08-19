@@ -1,18 +1,28 @@
 .usersContent {
   display: block;
 }
-.usersPagination {
-  margin-top: 20px;
-  span {
-    border: 0px;
-    padding: 5px 15px;
-    border-radius: 5px;
-    background-color: #e0e3e6;
-    margin: 0px 5px;
-    transition: 0.3s;
+
+.paginateActive {
+  background-color: #333333 !important;
+}
+.paginateLi {
+  border: 0px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #e0e3e6;
+  margin: 0px 5px;
+  transition: 0.3s;
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+    background-color: #6fa5e5;
+    text-decoration: none;
+  }
+  a {
+    color: black;
     &:hover {
       cursor: pointer;
-      background-color: #6fa5e5 !important;
+      text-decoration: none;
     }
   }
 }
@@ -20,7 +30,4 @@
   .usersPagination span {
     padding: 5px 5px;
   }
-}
-.activePage {
-  background-color: #6fa5e5 !important;
 }
