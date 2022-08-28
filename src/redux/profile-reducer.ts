@@ -32,7 +32,6 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfileInit
     case 'SET_USER_STATUS':
       return { ...state, status: action.status };
     case 'PROFILE_EDIT_MODE_TOGGLE':
-      debugger
       return { ...state, profileEditMode: action.toggle };
     default:
       return state;
@@ -40,13 +39,13 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfileInit
 };
 
 
-export const getProfileThunk = (userId: number): ThunkType => {
+export const getProfile = (userId: number): ThunkType => {
   return async (dispatch) => {
     const response = await profileAPI.getProfile(userId);
     dispatch(profileActions.setUserProfile(response));
   };
 };
-export const getProfileStatusThunk = (userId: number): ThunkType => {
+export const getProfileStatus = (userId: number): ThunkType => {
   return async (dispatch) => {
     const response = await profileAPI.getStatus(userId);
     dispatch(profileActions.setUserStatus(response.data));
@@ -66,7 +65,7 @@ export const setAvatar = (avatar: File): ThunkType => {
     const response = await profileAPI.updateAvatar(avatar);
     if (response.data.resultCode === 0) {
       if(userId) {
-        dispatch(getProfileThunk(userId));
+        dispatch(getProfile(userId));
       }
     }
   };
@@ -77,7 +76,7 @@ export const setProfileData = (profile: ProfileType): ThunkType => {
     if (response.data.resultCode === 0) {
       const userId = getState().auth.id
       if(userId) {
-        dispatch(getProfileThunk(userId));
+        dispatch(getProfile(userId));
         dispatch(profileActions.profileEditModeToggle(false));
       }
     } else

@@ -1,57 +1,80 @@
-import { Field } from "redux-form";
+import { Formik } from "formik";
+import { useSelector } from "react-redux";
+import { login } from "../../../redux/auth-reducer";
+import { useTypedDispatch } from "../../../redux/redux-store";
+import { getCaptcha } from "../../../redux/selectors/auth-selector";
 
-import FormControls from "../../../components/common/formControls/FormControls";
-import {
-  maxLengthCreator,
-  required,
-} from "../../../utils/validators/validator";
 import styles from "./LoginForm.module.scss";
 
-const maxLength30 = maxLengthCreator(30);
-const input = FormControls("input");
-const LoginForm = (props) => {
-  const { handleSubmit } = props;
+const LoginForm = () => {
+  const dispatch = useTypedDispatch();
+  const captcha = useSelector(getCaptcha);
   return (
-    <form onSubmit={handleSubmit} className={styles.loginForm}>
-      <div>
-        <label htmlFor="firstName">Email</label>
-        <Field
-          name="email"
-          component={input}
-          type="email"
-          validate={[required, maxLength30]}
-          placeholder="email"
-        />
-      </div>
-      <div>
-        <label htmlFor="passsword">Password</label>
-        <Field
-          name="password"
-          component={input}
-          type="password"
-          validate={[required, maxLength30]}
-          placeholder="password"
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Remember me</label>
-        <Field name="rememberMe" component="input" type="checkbox" />
-      </div>
-      <div className={styles.error}>{props.error}</div>
-      {props.captcha && (
-        <div className={styles.captcha}>
-          <img src={props.captcha} alt="captcha" />
-          <Field
-            name="captcha"
-            component={input}
-            type="text"
-            placeholder="Please enter captcha"
-          />
-        </div>
+    <Formik
+      initialValues={{ email: "", password: "", rememberMe: true }}
+      onSubmit={(values, { setSubmitting }) => {
+        const { email, password, rememberMe, captcha } = values;
+        dispatch(login(email, password, rememberMe, captcha));
+        setSubmitting(false);
+      }}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+        /* and other goodies */
+      }) => (
+        <form onSubmit={handleSubmit} className={styles.LoginForm}>
+          <div>
+            <input
+              type="email"
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+            />
+            {errors.email && touched.email && errors.email}
+          </div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+            />
+            {errors.password && touched.password && errors.password}
+          </div>
+          <div>
+            <label>
+              <input type="checkbox" name="rememberMe" />
+              Remember me
+            </label>
+          </div>
+          {captcha ? (
+            <div>
+              <div>
+                <img src={captcha} alt="captcha" />
+              </div>
+              <input
+                placeholder="Please enter captcha"
+                type="text"
+                name="captcha"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+          ) : null}
+          <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </form>
       )}
-
-      <button type="submit">Submit</button>
-    </form>
+    </Formik>
   );
 };
 

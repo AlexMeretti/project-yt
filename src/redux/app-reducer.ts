@@ -18,7 +18,7 @@ const appReducer = (state = initialState, action: ActionsTypes):AppInitialStateT
 
 export const initializeApp = (): ThunkType => {
   return async (dispatch) => {
-    dispatch(getAuthDataThunk())
+    await dispatch(getAuthDataThunk())
     dispatch(appActions.initializedSuccess());
   };
 };

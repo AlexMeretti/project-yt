@@ -1,6 +1,5 @@
 import {ProfileType } from './../types/types';
 import {BaseThunkType, InferActionTypes } from './redux-store';
-import { FormAction, stopSubmit } from "redux-form";
 import { authAPI} from "../api/auth-api";
 import { profileAPI} from "../api/profile-api";
 import { securityAPI } from "../api/security-api";
@@ -30,7 +29,6 @@ const messagesReducer = (state = initialState, action: ActionsTypes): AuthInitia
   }
 };
 
-
 export const getAuthDataThunk = (): ThunkType => {
   return async (dispatch) => {
     const response = await authAPI.getAuthData();
@@ -45,6 +43,7 @@ export const getAuthDataThunk = (): ThunkType => {
 };
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => {
   return async (dispatch) => {
+    debugger
     const response = await authAPI.login(email, password, rememberMe, captcha);
     if (response.data.resultCode === 0) {
       dispatch(getAuthDataThunk());
@@ -53,7 +52,6 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
         const response = await securityAPI.getCaptcha();
         dispatch(authActions.setCaptcha(response.url));
       }
-      dispatch(stopSubmit("login", { _error: response.data.messages[0] }));
     }
   };
 };
@@ -67,7 +65,7 @@ export const logout = (): ThunkType => {
   };
 };
 export default messagesReducer;
-type ThunkType = BaseThunkType<ActionsTypes | FormAction>
+type ThunkType = BaseThunkType<ActionsTypes>
 export type ActionsTypes = InferActionTypes<typeof authActions>
 
 export const authActions = {

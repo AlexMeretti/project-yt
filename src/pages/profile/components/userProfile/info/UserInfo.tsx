@@ -1,9 +1,6 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { reduxForm } from "redux-form";
 import Fetching from "../../../../../components/common/fetching/Fething";
-import { setProfileData } from "../../../../../redux/profile-reducer";
-import { useTypedDispatch } from "../../../../../redux/redux-store";
 import { getProfileEditMode } from "../../../../../redux/selectors/profile-selector";
 import { ProfileType } from "../../../../../types/types";
 import UserData from "./data/UserData";
@@ -20,10 +17,6 @@ const UserInfo: FC<PropsTypes> = ({
   owner,
 }) => {
   const profileEditMode = useSelector(getProfileEditMode)
-  const dispatch = useTypedDispatch()
-  const editFormSubmit = (values: any) => {
-    dispatch(setProfileData(values));
-  };
   if (!profile) {
     return <Fetching />
   } else
@@ -32,11 +25,8 @@ const UserInfo: FC<PropsTypes> = ({
       <div className={styles.name}>{profile.fullName}</div>
       <UserStatus />
       {profileEditMode ? (
-        <UserDataEditRedux
-        //@ts-ignore
+        <UserDataEdit
           profile={profile}
-          initialValues={profile}
-          onSubmit={editFormSubmit}
         />
       ) : (
         <UserData
@@ -47,6 +37,4 @@ const UserInfo: FC<PropsTypes> = ({
     </div>
   );
 };
-//@ts-ignore
-const UserDataEditRedux = reduxForm({ form: "editProfile" })(UserDataEdit);
 export default UserInfo;

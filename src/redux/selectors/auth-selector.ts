@@ -12,3 +12,6 @@ export const getAuthLogin = (state: AppStateType) => {
 export const getAuthId = (state: AppStateType) => {
   return state.auth.id;
 };
+export const getCaptcha  = (state: AppStateType) => {
+  return state.auth.captcha;
+};

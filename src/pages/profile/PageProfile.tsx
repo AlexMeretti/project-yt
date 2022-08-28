@@ -2,11 +2,11 @@ import {useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import {
-  getProfileThunk,
-  getProfileStatusThunk,
+  getProfile,
+  getProfileStatus,
 } from "../../redux/profile-reducer";
 import { useTypedDispatch } from "../../redux/redux-store";
-import { getAuthId } from "../../redux/selectors/auth-selector";
+import { getAuthId} from "../../redux/selectors/auth-selector";
 import UserProfile from "./components/UserProfile";
 
 
@@ -22,11 +22,11 @@ const PageProfile = () => {
       } else if (authId) {
         userId = authId
       }
-      dispatch(getProfileThunk(userId));
-      dispatch(getProfileStatusThunk(userId));
+      dispatch(getProfile(userId));
+      dispatch(getProfileStatus(userId));
     }
     renderProfile();
-  }, [paramsId, authId, getProfileThunk, getProfileStatusThunk]);
+  }, [paramsId, authId, getProfile, getProfileStatus]);
 
   if (!paramsId && !authId) {
     return <Navigate replace to="/" />;

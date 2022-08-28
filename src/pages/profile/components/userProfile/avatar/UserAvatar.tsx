@@ -30,7 +30,7 @@ const UserAvatar: FC<PropsTypes> = ({ avatar, owner }) => {
         <div className={styles.avatarUpload}>
           <form onSubmit={submitAvatar}>
             <input type="file" onChange={changeAvatar} />
-            <button>upload avatar</button>
+            {profileAvatar && <button>upload avatar</button>}
           </form>
         </div>
       )}

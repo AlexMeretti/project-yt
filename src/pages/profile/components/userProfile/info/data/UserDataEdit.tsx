@@ -1,72 +1,79 @@
-import { Field } from "redux-form";
-import FormControlsHoc from "../../../../../../components/common/formControls/FormControls";
+
 import { ProfileType } from "../../../../../../types/types";
-import { required } from "../../../../../../utils/validators/validator";
-import { profileActions } from '../../../../../../redux/profile-reducer'
+import { profileActions, setProfileData } from '../../../../../../redux/profile-reducer'
 //@ts-ignore
 import styles from "./scss/UserDataEdit.module.scss";
 import { useDispatch } from "react-redux";
-const input = FormControlsHoc("input");
-const textarea = FormControlsHoc("textarea");
+import { Field, Formik} from "formik";
+import { useTypedDispatch } from "../../../../../../redux/redux-store";
 type propsTypes = {
   profile: ProfileType
-  handleSubmit: () => void
-  profileEditModeToggle: (toggle: boolean) => void
-  error: string
 }
-const UserDataEdit = ({
-  profile,
-  handleSubmit,
-  error,
-}: propsTypes) => {
+const UserDataEdit = ({profile}: propsTypes) => {
+  const newContacts = Object.keys(profile.contacts)
+  const thunkDispatch = useTypedDispatch()
   const dispatch = useDispatch()
+  //@ts-ignore
   return (
     <div className={styles.editForm}>
-      <form onSubmit={handleSubmit}>
-        <label>Full name:</label>
-        <Field
-          name="fullName"
-          component={input}
-          type="text"
-          placeholder="full name"
-          validate={[required]}
-        />
-        <label>About me: </label>
-        <Field
-          name="aboutMe"
-          component={input}
-          type="text"
-          placeholder="about me"
-        />
-        <label>Looking job:</label>
-        <Field name="lookingForAJob" component={input} type="checkbox" />
+    <Formik initialValues={profile} 
+    onSubmit={(values, { setSubmitting }) =>{
+      setSubmitting(false)
+      thunkDispatch(setProfileData(values))
+    }}>{({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,}) => (
+        <form onSubmit={handleSubmit} className={styles.LoginForm}>
+        <div>
+          <label>About me: </label>
+          <Field name="aboutMe" type="text" placeholder="about me" onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.aboutMe}/>
+        </div>
+        <div>
+          <label>Looking job:</label>
+          <Field name="lookingForAJob" type="checkbox" checked={values.lookingForAJob} onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.lookingForAJob}/>
+        </div>
+        <div>
         <label>Job Description:</label>
         <Field
           name="lookingForAJobDescription"
-          component={textarea}
           type="text"
           placeholder="Description"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.lookingForAJobDescription}
         />
+        </div>
+        
         <div className={styles.contacts}>
-          {Object.entries(profile.contacts).map((el) => {
-            return (
+          {newContacts.map((el)=> {
+            return <div key={el}>
+              <label>{el}</label>
+              <Field placeholder={el} 
+              name={'contacts.' + el} 
+              type="text" 
+              onChange={handleChange} 
+              onBlur={handleBlur} 
               //@ts-ignore
-              <div key={el}>
-                <label>{el[0] + ": "}</label>
-                <Field
-                  name={"contacts." + el[0]}
-                  component={input}
-                  type="text"
-                  placeholder={el[0]}
-                />
-              </div>
-            );
+              value={values.contacts[el] || ''}></Field>
+            </div>
           })}
         </div>
-        <div className={styles.error}>{error}</div>
-        <button>Save</button>
-        <button onClick={() => dispatch(profileActions.profileEditModeToggle(false))}>X</button>
-      </form>
+          <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+          <button onClick={() => dispatch(profileActions.profileEditModeToggle(false))}>X</button>
+        </form>
+      )}
+    </Formik>
     </div>
   );
 };
