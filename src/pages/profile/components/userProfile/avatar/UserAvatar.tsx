@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 // @ts-ignore
 import noAvatar from "../../../../../assets/noAvatar.png";
 import { setAvatar } from "../../../../../redux/profile-reducer";
-import { useTypedDispatch } from "../../../../../redux/redux-store";
+import { useTypedThunkDispatch } from "../../../../../redux/redux-store";
 // @ts-ignore
 import styles from "./UserAvatar.module.scss";
 
@@ -11,7 +11,7 @@ type PropsTypes = {
   owner: boolean
 }
 const UserAvatar: FC<PropsTypes> = ({ avatar, owner }) => {
-  const dispatch = useTypedDispatch()
+  const dispatch = useTypedThunkDispatch()
   const [profileAvatar, setProfileAvatar] = useState<File>();
   const changeAvatar = (e: React.FormEvent<HTMLInputElement>) => {
     const target= e.target as HTMLInputElement;

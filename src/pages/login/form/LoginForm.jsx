@@ -1,13 +1,13 @@
 import { Formik } from "formik";
 import { useSelector } from "react-redux";
 import { login } from "../../../redux/auth-reducer";
-import { useTypedDispatch } from "../../../redux/redux-store";
+import { useTypedThunkDispatch } from "../../../redux/redux-store";
 import { getCaptcha } from "../../../redux/selectors/auth-selector";
 
 import styles from "./LoginForm.module.scss";
 
 const LoginForm = () => {
-  const dispatch = useTypedDispatch();
+  const dispatch = useTypedThunkDispatch();
   const captcha = useSelector(getCaptcha);
   return (
     <Formik

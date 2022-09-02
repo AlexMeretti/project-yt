@@ -1,6 +1,5 @@
 import { PostsType } from './../types/types';
 import { BaseThunkType, InferActionTypes } from './redux-store';
-import { FormAction, stopSubmit } from "redux-form";
 import { profileAPI } from "../api/profile-api";
 import { ProfileType } from '../types/types';
 
@@ -79,15 +78,12 @@ export const setProfileData = (profile: ProfileType): ThunkType => {
         dispatch(getProfile(userId));
         dispatch(profileActions.profileEditModeToggle(false));
       }
-    } else
-      dispatch(
-        stopSubmit("editProfile", { _error: response.data.messages[0] })
-      );
+    }
   };
 };
 
 export default profileReducer;
-type ThunkType = BaseThunkType<ActionsTypes | FormAction>
+type ThunkType = BaseThunkType<ActionsTypes>
 type ActionsTypes = InferActionTypes<typeof profileActions>
 
 export const profileActions = {

@@ -9,11 +9,11 @@ import Fetching from "../../common/fetching/Fething";
 import styles from "./AuthTrue.module.scss";
 //@ts-ignore
 import noAvatar from "../../../assets/noAvatar.png";
-import { useTypedDispatch } from "../../../redux/redux-store";
+import { useTypedThunkDispatch } from "../../../redux/redux-store";
 const AuthTrue = () => {
   const authProfile = useSelector(getAuthProfile);
   const authLogin = useSelector(getAuthLogin);
-  const dispatch = useTypedDispatch()
+  const dispatch = useTypedThunkDispatch()
   if (!authProfile) {
     return <Fetching />;
   } else

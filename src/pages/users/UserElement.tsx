@@ -7,7 +7,7 @@ import { FC } from "react";
 import { PhotosType } from "../../types/types";
 import { useSelector } from "react-redux";
 import { getIsFollowingProcess } from "../../redux/selectors/users-selector";
-import { useTypedDispatch } from "../../redux/redux-store";
+import { useTypedThunkDispatch } from "../../redux/redux-store";
 import { followThunk, unfollowThunk } from "../../redux/users-reducer";
 
 type UserElementType = {
@@ -25,7 +25,7 @@ const UserElement: FC<UserElementType> = ({
   followed,
 }) => {
   const isFollowingProcess = useSelector(getIsFollowingProcess)
-  const dispatch = useTypedDispatch()
+  const dispatch = useTypedThunkDispatch()
   return (
     <div className={styles.usersBlock}>
       <div className={styles.avatar}>

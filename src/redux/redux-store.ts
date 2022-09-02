@@ -5,7 +5,6 @@ import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 import authReducer, { ActionsTypes } from "./auth-reducer";
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from "redux-thunk";
-import { reducer as formReducer } from "redux-form";
 import appReducer from "./app-reducer";
 import sidebarReducer from "./sidebar-reducer"
 import { useDispatch } from "react-redux";
@@ -17,10 +16,9 @@ let rootReducer = combineReducers({
   messagesPage: messagesReducer,
   usersPage: usersReducer,
   auth: authReducer,
-  form: formReducer,
 });
 export type TypedDispatch = ThunkDispatch<AppStateType, any, ActionsTypes>;
-export const useTypedDispatch = () => useDispatch<TypedDispatch>();
+export const useTypedThunkDispatch = () => useDispatch<TypedDispatch>();
 
 
 

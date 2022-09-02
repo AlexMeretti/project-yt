@@ -1,15 +1,37 @@
 import { AppStateType, InferActionTypes } from './redux-store';
 import { ThunkAction } from "redux-thunk";
 import { usersAPI } from "../api/users-api";
-import { CurrentUsersType } from "../types/types";
+import { CurrentUsersType, FiltersType } from "../types/types";
 
 let initialState = {
   currentUsers: [] as Array<CurrentUsersType>,
   isFollowingProcess: [] as Array<number>,
+  pagination: {
+    perPage: 10,
+    pagesCount: 1,
+    currentPage: 1,
+    filters: {
+      term: '' as string,
+      friend: null as null | boolean
+    }
+  }
 };
 type usersInitialStateType = typeof initialState
 const usersReducer = (state = initialState, action: ActionsTypes): usersInitialStateType => {
   switch (action.type) {
+    case 'SET_FILTERS': {
+      return {
+        ...state, pagination: {...state.pagination, filters: action.filters}
+      }
+    }
+    case 'SET_CURRENT_PAGE':
+      return {
+        ...state, pagination: {...state.pagination, currentPage: action.page}
+      }
+    case 'SET_PAGES_COUNT':
+      return {
+        ...state, pagination: {...state.pagination, pagesCount: action.pages}
+      }
     case 'USER_TOGGLE_FOLLOW':
       return {
         ...state,
@@ -35,11 +57,13 @@ const usersReducer = (state = initialState, action: ActionsTypes): usersInitialS
       return state;
   }
 };
-export const getCurrentUsers = (page: number, perPage: number): ThunkType => {
-  return async (dispatch) => {
-    const response = await usersAPI.getUsers(page, perPage);
+export const getCurrentUsers = (): ThunkType => {
+  return async (dispatch, getState) => {
+    const {currentPage, perPage} = getState().usersPage.pagination
+    const {term, friend} = getState().usersPage.pagination.filters
+    const response = await usersAPI.getUsers(currentPage, perPage, term, friend);
     dispatch(usersActions.setCurrentUsers(response.items));
-    return response.totalCount;
+    dispatch(usersActions.setPagesCount(Math.ceil(response.totalCount / perPage)))
   };
 };
 const _followUnfollowThunk = (userId: number, methodApi: any)=> {
@@ -53,22 +77,33 @@ const _followUnfollowThunk = (userId: number, methodApi: any)=> {
   };
 };
 
-export const followThunk = (userId: number): MyThunkType => {
+export const followThunk = (userId: number): ThunkType => {
   return async(dispatch) => {
     dispatch(_followUnfollowThunk(userId, usersAPI.follow(userId)));
   };
 };
-export const unfollowThunk = (userId: number): MyThunkType => {
+export const unfollowThunk = (userId: number): ThunkType => {
   return async(dispatch) => {
     dispatch(_followUnfollowThunk(userId, usersAPI.unfollow(userId)));
   };
 };
 export default usersReducer;
-type MyThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-type ThunkType = ThunkAction<Promise<number>, AppStateType, unknown, ActionsTypes>
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 type ActionsTypes = InferActionTypes<typeof usersActions>
 
 export const usersActions = {
+  setFilters: (filters: FiltersType) => ({
+    type: 'SET_FILTERS',
+    filters: {...filters}
+  } as const),
+  setCurrentPage: (page: number) => ({
+    type: 'SET_CURRENT_PAGE',
+    page
+  } as const),
+  setPagesCount: (pages: number) => ({
+    type: 'SET_PAGES_COUNT',
+    pages
+  } as const),
   setCurrentUsers: (currentUsers: Array<CurrentUsersType>) => ({
     type: 'SET_CURRENT_USERS',
     currentUsers,

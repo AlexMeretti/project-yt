@@ -5,13 +5,13 @@ import { profileActions, setProfileData } from '../../../../../../redux/profile-
 import styles from "./scss/UserDataEdit.module.scss";
 import { useDispatch } from "react-redux";
 import { Field, Formik} from "formik";
-import { useTypedDispatch } from "../../../../../../redux/redux-store";
+import { useTypedThunkDispatch } from "../../../../../../redux/redux-store";
 type propsTypes = {
   profile: ProfileType
 }
 const UserDataEdit = ({profile}: propsTypes) => {
   const newContacts = Object.keys(profile.contacts)
-  const thunkDispatch = useTypedDispatch()
+  const thunkDispatch = useTypedThunkDispatch()
   const dispatch = useDispatch()
   //@ts-ignore
   return (

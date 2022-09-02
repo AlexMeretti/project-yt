@@ -5,7 +5,7 @@ import {
   getProfile,
   getProfileStatus,
 } from "../../redux/profile-reducer";
-import { useTypedDispatch } from "../../redux/redux-store";
+import { useTypedThunkDispatch } from "../../redux/redux-store";
 import { getAuthId} from "../../redux/selectors/auth-selector";
 import UserProfile from "./components/UserProfile";
 
@@ -13,7 +13,7 @@ import UserProfile from "./components/UserProfile";
 const PageProfile = () => {
   const paramsId = useParams().id;
   const authId = useSelector(getAuthId)
-  const dispatch = useTypedDispatch()
+  const dispatch = useTypedThunkDispatch()
   useEffect(() => {
     let userId: number
     const renderProfile = () => {
@@ -26,7 +26,7 @@ const PageProfile = () => {
       dispatch(getProfileStatus(userId));
     }
     renderProfile();
-  }, [paramsId, authId, getProfile, getProfileStatus]);
+  }, [paramsId, authId, dispatch]);
 
   if (!paramsId && !authId) {
     return <Navigate replace to="/" />;

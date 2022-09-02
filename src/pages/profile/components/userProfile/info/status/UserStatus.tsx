@@ -3,12 +3,12 @@ import styles from "./UserStatus.module.scss";
 import React, { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getProfileStatus } from "../../../../../../redux/selectors/profile-selector";
-import { useTypedDispatch } from "../../../../../../redux/redux-store";
+import { useTypedThunkDispatch } from "../../../../../../redux/redux-store";
 import { setProfileStatus } from "../../../../../../redux/profile-reducer";
 
 const UserStatus: FC = () => {
   const initialStatus = useSelector(getProfileStatus)
-  const dispatch = useTypedDispatch()
+  const dispatch = useTypedThunkDispatch()
   const [status, setStatus] = React.useState<string>(initialStatus);
   const [editMode, setEditMode] = React.useState<boolean>(false);
   const onChangeStatus = (e: any) => {

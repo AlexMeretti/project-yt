@@ -1,14 +1,12 @@
 import { FC } from "react";
+import { Filter } from "./filters/Filter";
 import PaginatedUsers from "./PaginatedUsers";
 const UsersPage: FC = () => {
-  return (
-    <>
-      <div>
-          <PaginatedUsers />
-      </div>
-      <div>Filters</div>
+
+  return  <>
+    <Filter />
+    <PaginatedUsers />
     </>
-  );
 };
 
 

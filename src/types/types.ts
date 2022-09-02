@@ -57,3 +57,7 @@ export type MenuType = {
   link: string
   name: string
 }
+export type FiltersType = {
+  term: string
+  friend: null | boolean
+}

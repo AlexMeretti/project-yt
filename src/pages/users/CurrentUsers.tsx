@@ -5,7 +5,7 @@ import UserElement from "./UserElement";
 
 const CurrentUsers: React.FC = () => {
   const currentUsers = useSelector(getCurrentUsers)
-  if (currentUsers) {
+  if (currentUsers.length > 0) {
     return <>
     {currentUsers.map((user: CurrentUsersType) => (
       <UserElement
@@ -13,7 +13,7 @@ const CurrentUsers: React.FC = () => {
       />
     ))}
     </>
-  } else return null
+  } else return <><p>Not found.. Reset filters?</p></>
 };
 
 export default CurrentUsers;
