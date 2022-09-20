@@ -4,10 +4,10 @@ import { Navigate, useParams } from "react-router-dom";
 import {
   getProfile,
   getProfileStatus,
-} from "../../redux/profile-reducer";
+} from "../../redux/reducers/profile-reducer";
 import { useTypedThunkDispatch } from "../../redux/redux-store";
 import { getAuthId} from "../../redux/selectors/auth-selector";
-import UserProfile from "./components/UserProfile";
+import UserProfile from "./UserProfile";
 
 
 const PageProfile = () => {
@@ -27,10 +27,16 @@ const PageProfile = () => {
     }
     renderProfile();
   }, [paramsId, authId, dispatch]);
-
+  if(paramsId) {
+    if(+paramsId === authId) {
+      return <Navigate replace to="/profile" />
+    }
+  }
   if (!paramsId && !authId) {
     return <Navigate replace to="/" />;
   }
-  return <><UserProfile owner={!paramsId} /></>
+  return <div className="profilePage">
+    <UserProfile owner={!paramsId} />
+    </div>
 };
 export default PageProfile

@@ -1,0 +1,19 @@
+.loginPage {
+  .formLogin {
+    width: 300px;
+    input {
+      margin-bottom: 10px;
+    }
+    .captcha {
+      margin: 10px 0;
+      width: 200px;
+      img {
+        margin-bottom: 10px;
+      }
+    }
+    label {
+      color: white;
+      margin-right: 5px;
+    }
+  }
+}

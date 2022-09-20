@@ -1,18 +1,16 @@
 
 import { Action, applyMiddleware, combineReducers, legacy_createStore } from "redux";
-import messagesReducer from "./messages-reducer";
-import profileReducer from "./profile-reducer";
-import usersReducer from "./users-reducer";
-import authReducer, { ActionsTypes } from "./auth-reducer";
+import messagesReducer from "./reducers/messages-reducer";
+import profileReducer from "./reducers/profile-reducer";
+import usersReducer from "./reducers/users-reducer";
+import authReducer, { ActionsTypes } from "./reducers/auth-reducer";
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from "redux-thunk";
-import appReducer from "./app-reducer";
-import sidebarReducer from "./sidebar-reducer"
+import appReducer from "./reducers/app-reducer";
 import { useDispatch } from "react-redux";
 
 let rootReducer = combineReducers({
   app: appReducer,
   profilePage: profileReducer,
-  sidebar: sidebarReducer,
   messagesPage: messagesReducer,
   usersPage: usersReducer,
   auth: authReducer,

@@ -1,53 +1,60 @@
 import React, { Suspense, useEffect } from "react";
-import "./Index.scss";
 import { Routes, Route } from "react-router-dom";
-import LoginContainer from "./pages/login/Login";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { initializeApp } from "./redux/app-reducer";
+import { useSelector } from "react-redux";
 import Fetching from "./components/common/fetching/Fething";
-import Sidebar from "./components/sidebar/Sidebar";
-import Header from "./components/header/Header";
+import Header from "./components/header/SocialHeader";
 import UsersPage from "./pages/users/UsersPage";
 import PageProfile from "./pages/profile/PageProfile";
-const PageMessagesContainer = React.lazy(() =>
-  import("./pages/messages/PageMessagesContainer")
-);
+import { getInitialized } from "./redux/selectors/app-selector";
+import { initializeApp } from "./redux/reducers/app-reducer";
+import { useTypedThunkDispatch } from "./redux/redux-store";
+import { Layout } from "antd";
+import { Content, Footer } from "antd/lib/layout/layout";
+import SocialHeader from "./components/header/SocialHeader";
+import "./styles/styles.scss";
+import Dialog from "./pages/messages/Dialog";
+import SocialFooter from "./components/footer/SocialFooter";
+import LoginPage from "./pages/login/LoginPage";
+const MessagesPage = React.lazy(() => import("./pages/messages/MessagesPage"));
 
-const App = ({ initializeApp, initialized }) => {
+const App = () => {
+  const initialized = useSelector(getInitialized);
+  const dispatch = useTypedThunkDispatch();
   useEffect(() => {
-    initializeApp();
-  }, [initializeApp]);
+    dispatch(initializeApp());
+  }, [dispatch]);
   if (!initialized) {
     return <Fetching />;
   } else
     return (
-      <div className="gridContainer">
-        <Header />
-        <div className="gridItemSidebar">{<Sidebar />}</div>
-        <div className="gridItemContent">
-          <Routes>
-            <Route path="/" element={<LoginContainer />}></Route>
-            <Route path="/profile/" element={<PageProfile />}></Route>
-            <Route path="/profile/:id" element={<PageProfile />}></Route>
-            <Route
-              path="/messages/*"
-              element={
-                <Suspense fallback={<div>Загрузка...</div>}>
-                  <PageMessagesContainer />
-                </Suspense>
-              }
-            ></Route>
-            <Route path="/users/" element={<UsersPage />}></Route>
-          </Routes>
-        </div>
-      </div>
+      <>
+        <Layout className="layout">
+          <Header>
+            <SocialHeader />
+          </Header>
+
+          <Content className="content">
+            <Routes>
+              <Route path="/" element={<LoginPage />}></Route>
+              <Route path="/profile/" element={<PageProfile />}></Route>
+              <Route path="/profile/:id" element={<PageProfile />}></Route>
+              <Route
+                path="/messages/"
+                element={
+                  <Suspense fallback={<div>Загрузка...</div>}>
+                    <MessagesPage />
+                  </Suspense>
+                }
+              ></Route>
+              <Route path="/messages/:id" element={<Dialog />}></Route>
+              <Route path="/users/" element={<UsersPage />}></Route>
+            </Routes>
+          </Content>
+          <Footer className="componentsFooter">
+            <SocialFooter />
+          </Footer>
+        </Layout>
+      </>
     );
 };
-const mapStateToProps = (state) => {
-  return {
-    initialized: state.app.initialized,
-  };
-};
-
-export default compose(connect(mapStateToProps, { initializeApp }))(App);
+export default App;

@@ -42,10 +42,7 @@ export type PostsType = {
     likes: number
     avatar?: string | null
   }
-export type MessagesType = {
-    id: string,
-    message: string
-  }
+
 export type FriendsType = {
     id: string,
     name: string,
@@ -60,4 +57,23 @@ export type MenuType = {
 export type FiltersType = {
   term: string
   friend: null | boolean
+}
+export type DialogsType = {
+  hasNewMessages: boolean
+  id: number
+  lastDialogActivityDate: string
+  lastUserActivityDate: string
+  newMessagesCount: number
+  photos: {small: null | string, large: null | string}
+  userName: string
+}
+export type MessagesType = {
+  addedAt: string
+  body: string
+  id: string
+  recipientId: number
+  senderId: number
+  senderName: string
+  translatedBody: any
+  viewed: boolean
 }

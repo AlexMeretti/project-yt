@@ -1,0 +1,31 @@
+@import "./components/footer.scss";
+@import "./components/header.scss";
+@import "./pages/messages.scss";
+@import "./pages/users.scss";
+@import "./pages/profile.scss";
+@import "./pages/login.scss";
+
+body {
+  background-color: #141414 !important;
+}
+
+.layout {
+  width: 600px;
+  margin: 0 auto;
+  background: #141414 !important;
+}
+.content {
+  background-color: #222222;
+  margin: 20px 0;
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid #424242;
+  h1,
+  h2 {
+    color: #e0e3e6;
+  }
+}
+.footer {
+  background-color: #222222 !important;
+  border-radius: 15px;
+}

@@ -9,12 +9,12 @@ export const getIsFollowingProcess = (state: AppStateType) => {
 export const getPaginationPerPage = (state: AppStateType) => {
   return state.usersPage.pagination.perPage;
 };
-export const getPaginationPagesCount = (state: AppStateType) => {
-  return state.usersPage.pagination.pagesCount;
+export const getPaginationTotalCount = (state: AppStateType) => {
+  return state.usersPage.pagination.totalCount;
 };
 export const getPaginationCurrentPage = (state: AppStateType) => {
   return state.usersPage.pagination.currentPage;
 };
-export const getPaginationFilters = (state: AppStateType) => {
-  return state.usersPage.pagination.filters
+export const getUsersFilters = (state: AppStateType) => {
+  return state.usersPage.filters
 }

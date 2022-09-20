@@ -1,0 +1,104 @@
+.messagesPage {
+  .messagesBlock {
+    .dialogItems {
+      .dialogItem {
+        border-bottom: 1px solid #424242;
+        margin: 15px 0;
+        padding-bottom: 10px;
+        a span {
+          color: #828282;
+          font-size: 10px;
+        }
+        .avatar {
+          margin-right: 10px;
+        }
+        .badge {
+          .ant-badge-count {
+            left: 10px;
+            right: auto;
+          }
+        }
+        .dialogName {
+          p {
+            color: #424242;
+            margin: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+.userDialog {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  border-bottom: 1px solid #424242;
+  padding-bottom: 10px;
+
+  .name {
+    text-align: center;
+    p {
+      color: #e0e3e6;
+      margin: 0;
+    }
+  }
+  .avatar {
+    border: 1px solid #424242;
+    border-radius: 50%;
+  }
+}
+.userDialogMessages {
+  .notRead {
+    background: #333333;
+  }
+  padding: 20px;
+  .block {
+    position: relative;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "img heading" "img body";
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    .delete {
+      position: absolute;
+      color: #828282;
+      right: 0;
+      width: 50px;
+      height: 100%;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar {
+      grid-area: img;
+      span {
+        margin-right: 5px;
+      }
+    }
+    .heading {
+      grid-area: heading;
+      a {
+        margin: 0px;
+        color: #1890ff;
+        &:hover {
+          color: #40a9ff;
+        }
+      }
+      span {
+        color: #828282;
+        font-size: 10px;
+      }
+    }
+    .body {
+      grid-area: body;
+      p {
+        margin: 0px;
+        color: #e0e3e6;
+      }
+    }
+  }
+}
